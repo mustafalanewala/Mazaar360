@@ -1,90 +1,117 @@
 import React, { useState } from "react";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { FaBars, FaTimes } from "react-icons/fa"; // Import icons from React Icons
 
 const Navbar = () => {
-  const [navBar, setNavbarActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navbarHandler = () => {
-    setNavbarActive(!navBar);
+  const toggleNav = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <>
-      {/* Desktop Navbar */}
-      <div className="hidden sm:flex fixed w-full items-center justify-between px-8 bg-black py-4 text-white z-50">
+    <nav className="bg-black p-4 fixed w-full z-10">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-2xl font-semibold mr-4 tracking-wider">Mazaar360</h1>
+          <div className="text-white text-2xl font-bold">Mazaar360</div>
         </div>
-        <ul className="flex justify-center flex-1 px-4 cursor-pointer">
-          <li className="px-2 mr-4 text-xl relative group">
+        <div className="hidden md:flex justify-center items-center">
+          <a
+            href="#"
+            className="text-white text-xl font-medium mr-8 relative hover:before:content-[''] hover:before:absolute hover:before:w-1 hover:before:h-1 hover:before:bg-white hover:before:rounded-full hover:before:-bottom-1 hover:before:left-1/2 hover:before:transform hover:before:-translate-x-1/2"
+          >
             Home
-            <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          </li>
-          <li className="px-2 mr-4 text-xl relative group">
+          </a>
+          <a
+            href="#"
+            className="text-white text-xl font-medium mr-8 relative hover:before:content-[''] hover:before:absolute hover:before:w-1 hover:before:h-1 hover:before:bg-white hover:before:rounded-full hover:before:-bottom-1 hover:before:left-1/2 hover:before:transform hover:before:-translate-x-1/2"
+          >
             Mazaars
-            <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          </li>
-          <li className="px-2 mr-4 text-xl relative group">
-            Map View
-            <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          </li>
-          <li className="px-2 mr-4 text-xl relative group">
+          </a>
+          <a
+            href="#"
+            className="text-white text-xl font-medium mr-8 relative hover:before:content-[''] hover:before:absolute hover:before:w-1 hover:before:h-1 hover:before:bg-white hover:before:rounded-full hover:before:-bottom-1 hover:before:left-1/2 hover:before:transform hover:before:-translate-x-1/2"
+          >
+            Map
+          </a>
+          <a
+            href="#"
+            className="text-white text-xl font-medium mr-8 relative hover:before:content-[''] hover:before:absolute hover:before:w-1 hover:before:h-1 hover:before:bg-white hover:before:rounded-full hover:before:-bottom-1 hover:before:left-1/2 hover:before:transform hover:before:-translate-x-1/2"
+          >
             Community
-            <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          </li>
-          <li className="px-2 mr-4 text-xl relative group">
-            Gallery
-            <span className="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-          </li>
-        </ul>
-        <div>
-          <button className="px-6 py-1.5 bg-white text-xl font-semibold text-black rounded-md mr-4" onClick={()=>document.getElementById("id").showModal()}>
-            Login
+          </a>
+          <a
+            href="#"
+            className="text-white text-xl font-medium mr-8 relative hover:before:content-[''] hover:before:absolute hover:before:w-1 hover:before:h-1 hover:before:bg-white hover:before:rounded-full hover:before:-bottom-1 hover:before:left-1/2 hover:before:transform hover:before:-translate-x-1/2"
+          >
+            Garden
+          </a>
+          <button
+            type="button"
+            className="py-2 px-5 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800"
+          >
+            Log In
           </button>
-          {/* <Login /> */}
+        </div>
+        <div className="md:hidden">
+          {isOpen ? (
+            <FaTimes
+              className="text-white text-2xl cursor-pointer"
+              onClick={toggleNav}
+            />
+          ) : (
+            <FaBars
+              className="text-white text-2xl cursor-pointer"
+              onClick={toggleNav}
+            />
+          )}
         </div>
       </div>
 
-      {/* Mobile Navbar */}
-      <div className="sm:hidden flex fixed w-full items-center justify-between px-8 bg-black py-4 text-white z-50">
-        <div className="flex items-center">
-          <h1 className="text-2xl font-semibold mr-4">Mazaar360</h1>
-        </div>
-        <div className="flex items-center">
-          <div className="flex sm:hidden" onClick={navbarHandler}>
-            {navBar ? (
-              <AiOutlineClose size={30} />
-            ) : (
-              <AiOutlineMenu size={30} />
-            )}
-          </div>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-black w-full h-screen flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center py-4 mt-10">
+          <a
+            href="#"
+            className="text-white font-bold text-4xl my-2 hover:underline"
+          >
+            Home
+          </a>
+          <a
+            href="#"
+            className="text-white font-bold text-4xl my-2 hover:underline"
+          >
+            Mazaars
+          </a>
+          <a
+            href="#"
+            className="text-white font-bold text-4xl my-2 hover:underline"
+          >
+            Map
+          </a>
+          <a
+            href="#"
+            className="text-white font-bold text-4xl my-2 hover:underline"
+          >
+            Community
+          </a>
+          <a
+            href="#"
+            className="text-white font-bold text-4xl my-2 hover:underline"
+          >
+            Gallery
+          </a>
+          <button
+            type="button"
+            className="py-3 px-7 my-4 inline-flex items-center gap-x-2 text-3xl font-semibold rounded-lg border border-transparent bg-gray-800 text-white hover:bg-gray-900 disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-neutral-800"
+          >
+            Log In
+          </button>
         </div>
       </div>
-
-      {/* Mobile Nav Links and Button */}
-      {navBar && (
-        <div className="sm:hidden fixed top-0 left-0 h-screen w-full bg-black text-white z-40">
-          <div className="flex justify-between items-center px-8 py-4">
-            <h1 className="text-2xl font-semibold">Mazaar360</h1>
-            <div onClick={navbarHandler}>
-              <AiOutlineClose size={30} />
-            </div>
-          </div>
-          <ul className="flex flex-col items-center justify-center mt-24">
-            <li className="mb-6 font-bold text-4xl">Home</li>
-            <li className="mb-6 font-bold text-4xl">Mazaars</li>
-            <li className="mb-6 font-bold text-4xl">Map View</li>
-            <li className="mb-6 font-bold text-4xl">Community</li>
-            <li className="mb-6 font-bold text-4xl">Gallery</li>
-          </ul>
-          <div className="flex justify-center mt-auto mb-4">
-            <button className="px-10 py-2 text-4xl font-bold bg-white text-black rounded-md">
-              Login
-            </button>
-          </div>
-        </div>
+      
       )}
-    </>
+    </nav>
   );
 };
 
